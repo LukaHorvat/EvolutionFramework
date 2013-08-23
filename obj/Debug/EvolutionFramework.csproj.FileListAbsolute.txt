@@ -1,0 +1,6 @@
+C:\Users\Luka\Documents\Visual Studio 2012\Projects\EvolutionFramework\EvolutionFramework\bin\Debug\EvolutionFramework.exe.config
+C:\Users\Luka\Documents\Visual Studio 2012\Projects\EvolutionFramework\EvolutionFramework\obj\Debug\EvolutionFramework.csprojResolveAssemblyReference.cache
+C:\Users\Luka\Documents\Visual Studio 2012\Projects\EvolutionFramework\EvolutionFramework\bin\Debug\EvolutionFramework.exe
+C:\Users\Luka\Documents\Visual Studio 2012\Projects\EvolutionFramework\EvolutionFramework\bin\Debug\EvolutionFramework.pdb
+C:\Users\Luka\Documents\Visual Studio 2012\Projects\EvolutionFramework\EvolutionFramework\obj\Debug\EvolutionFramework.exe
+C:\Users\Luka\Documents\Visual Studio 2012\Projects\EvolutionFramework\EvolutionFramework\obj\Debug\EvolutionFramework.pdb

@@ -19,6 +19,18 @@ namespace EvolutionFramework
 
 	public class Command : Gene
 	{
+		public static readonly int NumCommands;
+
+		static Command()
+		{
+			NumCommands = Enum.GetNames(typeof(CommandType)).Length;
+			FromInt = new Command[NumCommands];
+			for (int i = 0; i < NumCommands; ++i)
+			{
+				FromInt[i] = new Command((CommandType)i);
+			}
+		}
+
 		public CommandType CommandType;
 		public static Dictionary<CommandType, int> ArgumentNumber = new Dictionary<CommandType, int>
 		{
@@ -40,6 +52,7 @@ namespace EvolutionFramework
 			{CommandType.Swp, 2},
 			{CommandType.Dup, 1}
 		};
+		public static Command[] FromInt;
 
 		public Command(CommandType type)
 		{

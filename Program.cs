@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,28 +9,25 @@ namespace EvolutionFramework
 {
 	class Program
 	{
-		static int score;
+		static EatingChallenge env;
+
 		static void Main(string[] args)
 		{
-			var env = new Enviroment(() => score = 0, cell => new Report(score * 10 - cell.Genome.Code.Count - cell.Ticks, "Before reduction: " + score), 1000);
-			env.Update += (index, value) =>
-			{
-				if (index == 0) score++;
-			};
+			env = new EatingChallenge();
+
 			var random = new Random();
-			var pool = new GenePool(10);
-			for (int i = 0; i < 5000; ++i)
+			var pool = new GenePool(20)
+			{
+				SavingInterval = 500
+			};
+
+			int generation = 0;
+			while (true)
 			{
 				pool.Generation(env, random);
+				generation++;
+				if (generation % 100 == 0) Console.WriteLine(generation);
 			}
-			Console.WriteLine("Score: ");
-			foreach (var score in pool.Survivors)
-			{
-				Console.WriteLine(score.Competitor + ": " + score.Value);
-			}
-			CodePrinter.PrintGenome(pool.Survivors.First().Competitor.Genome);
-
-			Console.ReadKey();
 		}
 	}
 }

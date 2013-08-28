@@ -19,7 +19,7 @@ namespace EvolutionFramework
 		{
 			var genome = new Genome();
 			genome.Code = code
-				.Split(' ')
+				.Split(new[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(str => Gene.FromString(str))
 				.ToList();
 			return genome;

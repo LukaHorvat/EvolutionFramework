@@ -8,13 +8,19 @@ namespace EvolutionFramework
 {
 	public class Report
 	{
-		public int Score;
+		public long Score;
 		public string Info;
 
-		public Report(int score, string info = "")
+		public Report(long score, string info = "")
 		{
 			Score = score;
 			Info = info;
+		}
+
+		public override string ToString()
+		{
+			if (Info != "") return Info + ", TOTAL SCORE: " + Score;
+			else return "TOTAL SCORE: " + Score;
 		}
 	}
 }

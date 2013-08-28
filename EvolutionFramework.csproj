@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,7 +45,10 @@
     <Compile Include="Cell.cs" />
     <Compile Include="CodePrinter.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="Enviroment.cs" />
+    <Compile Include="DrawingChallenge.cs" />
+    <Compile Include="EatingChallenge.cs" />
+    <Compile Include="Environment.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Gene.cs" />
     <Compile Include="GenePool.cs" />
     <Compile Include="Genome.cs" />
@@ -56,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

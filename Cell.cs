@@ -239,12 +239,51 @@ namespace EvolutionFramework
 
 		public Cell Sex(Cell mate, Random rand)
 		{
-			var genome = Genome.FromGenes(
-				Genome.Code.Take(rand.Next(Genome.Code.Count))
-				.Concat(
-				mate.Genome.Code.Skip(rand.Next(mate.Genome.Code.Count)))
-				.ToList());
-			return new Cell(genome);
+			int totalLength = rand.Next(Genome.Code.Count + mate.Genome.Code.Count);
+			var tempArray = new Gene[totalLength];
+			int i = 0;
+			var strandsIndices = new List<int>()
+			{
+				0, 0
+			};
+			var strandsGenomes = new List<Genome>()
+			{
+				Genome, mate.Genome
+			};
+
+			while (i < totalLength)
+			{
+				for (int j = 0; j < 2; ++j)
+				{
+					int toAdd = Math.Min(totalLength - i - 1, rand.Next(5) + 1);
+					int choice = rand.Next(3);
+					switch (choice)
+					{
+						case 0:
+							//Skip this strand this step
+							break;
+						case 1:
+							//Skip the decided number of genes in this strand
+							strandsIndices[j] += toAdd;
+							break;
+						case 2:
+							//Add the decided number of genes from this strand
+							for (int k = strandsIndices[j]; k < strandsGenomes[j].Code.Count && i < tempArray.Length; ++k, ++i)
+							{
+								tempArray[i] = strandsGenomes[j].Code[k];
+								strandsIndices[j] = k;
+							}
+							break;
+					}
+				}
+				if (strandsIndices[0] >= strandsGenomes[0].Code.Count && strandsIndices[1] >= strandsGenomes[1].Code.Count) break;
+			}
+
+			var gen = new Genome()
+			{
+				Code = tempArray.Where(gene => gene != null).ToList()
+			};
+			return new Cell(gen);
 		}
 
 		public void Kill()

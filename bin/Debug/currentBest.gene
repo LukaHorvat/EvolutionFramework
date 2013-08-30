@@ -1,1 +1,1 @@
-{0 0 Set 0 Jmp 0 Xor Xor Xor 0 }{1 }{0 2 Sub 1 }{}{0 }{}{}{}{-1 -1 }{}{}{0 0 -1 }{}{1 }{}{}{0 0 0 }{4 -1 0 -1 1 0 Eq 0 Jmp }{}{-1 0 1 Gt -1 }
+{0 2 0 1 Dup Set Set Dup Jmp }{0 2 0 1 Dup Set Set Jmp Set Jmp }{0 2 0 1 Dup Set Set Jmp 1 Dup }{0 2 0 1 Dup Set Set Jmp }{0 2 0 1 Dup Set Set Jmp }{0 2 0 1 Dup Set Set Jmp 0 0 }{0 2 0 1 Dup Set Set Jmp 0 }{0 2 0 1 Dup Set Set Jmp }{0 2 0 1 Dup Set Set Jmp Jmp Jmp }{0 2 0 1 Dup Set Set Jmp }

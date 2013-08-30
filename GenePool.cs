@@ -47,28 +47,21 @@ namespace EvolutionFramework
 			var cells = Survivors.Select(score => score.Competitor).ToList();
 			Survivors.Clear();
 			var candidates =
-				cells
-				.Concat(cells.Select(cell => cell.Mutate(rand.NextBiased(100), rand)))
-				.Concat(cells.AllPairs((first, second) => first.Sex(second, rand).Mutate(rand.NextBiased(100), rand)));
+				cells //Add current survivors,
+				.Concat(cells.Select(cell => cell.Mutate(rand.NextBiased(100) + 1, rand))) //then mutated survivors,
+				.Concat(cells.AllPairs((first, second) => first.Sex(second, rand))); //then breed each survivor with each other and add those
 
-			Survivors.AddRange(candidates.Select(cell =>
-			{
-				var rep = env.Test(cell);
-				if (rep == null)
-				{
-					//Cell is dead, skip the review
-					return new Score(cell, new Report(long.MinValue));
-				}
-				return new Score(cell, rep);
-			}));
+			Survivors.AddRange(candidates
+				.Select(env.Test)
+				.Where(score => score != null));
 
 			Survivors.Sort((first, second) =>
 			{
-				if (first.Value.Score == long.MinValue) return 1;
-				if (second.Value.Score == long.MinValue) return -1;
-				var diff = second.Value.Score - first.Value.Score;
-				return diff == 0 ? 0 : (diff > 0 ? 1 : -1);
+				long x = first.Value.Score;
+				long y = second.Value.Score;
+				return x == y ? 0 : (y > x ? 1 : -1);
 			});
+
 			Survivors = Survivors.Take(Capacity).ToList();
 
 			if (SavingInterval != 0 && saveCounter % SavingInterval == 0)

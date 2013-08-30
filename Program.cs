@@ -16,7 +16,7 @@ namespace EvolutionFramework
 			env = new EatingChallenge();
 
 			var random = new Random();
-			var pool = new GenePool(20)
+			var pool = new GenePool(10)
 			{
 				SavingInterval = 500
 			};

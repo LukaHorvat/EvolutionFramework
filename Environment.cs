@@ -88,13 +88,13 @@ namespace EvolutionFramework
 		/// </summary>
 		/// <param name="cell"></param>
 		/// <returns></returns>
-		public Report Test(Cell cell)
+		public Score Test(Cell cell)
 		{
 			Clean();
 			CurrentCell = cell;
 			cell.Cycle(this);
 			if (cell.Dead) return null;
-			return OnReview();
+			return new Score(cell, OnReview());
 		}
 	}
 }

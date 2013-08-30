@@ -9,6 +9,7 @@ namespace EvolutionFramework
 {
 	class EatingChallenge : Environment
 	{
+		bool[] preset;
 		bool[] field;
 		int x;
 		int y;
@@ -20,8 +21,15 @@ namespace EvolutionFramework
 		{
 			IllegalSyntaxRule = IllegalSyntaxBehavior.Kill;
 			OutOfBoundsJumpRule = OutOfBoundsJumpBehavior.Kill;
+			preset = new bool[256 * 256];
 			field = new bool[256 * 256];
 			path = new bool[256 * 256];
+
+			var rand = new Random();
+			for (int i = 0; i < 500; ++i)
+			{
+				preset[rand.Next(256) * 256 + rand.Next(256)] = true;
+			}
 		}
 
 		public override void OnSet(int index, int value)
@@ -47,22 +55,17 @@ namespace EvolutionFramework
 			base.OnClean();
 			x = 128;
 			y = 128;
-			Array.Clear(field, 0, field.Length);
+			Array.Copy(preset, field, preset.Length);
 			Array.Clear(path, 0, path.Length);
-
-			var rand = new Random();
-			for (int i = 0; i < 100; ++i)
-			{
-				field[rand.Next(256) * 256 + rand.Next(256)] = true;
-			}
 		}
 
 		long bestScore = 0;
 		public override Report OnReview()
 		{
-			if (Score > bestScore)
+			var score = Score - (CurrentCell.Genome.Code.Count > 10 ? CurrentCell.Genome.Code.Count : 0);
+			if (score > bestScore)
 			{
-				bestScore = Score;
+				bestScore = score;
 				Console.WriteLine("New best: " + bestScore);
 				bmp = new Bitmap(256, 256);
 				for (int i = 0; i < 256; ++i)
@@ -77,7 +80,7 @@ namespace EvolutionFramework
 				}
 				bmp.Save("image.png");
 			}
-			return new Report(Score - (CurrentCell.Genome.Code.Count > 10 ? CurrentCell.Genome.Code.Count : 0));
+			return new Report(score);
 		}
 	}
 }
